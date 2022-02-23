@@ -1,0 +1,25 @@
+﻿@using EntityLayer.DTOs
+@model List<BookDetailDto>
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+
+<table class="table table-bordered">
+    <tr>
+        <th>Name</th>
+        <th>Publisher</th>
+        <th>Writer</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.BookName</td>
+            <td>@item.PublisherName</td>
+            <td>@item.WriterName @item.WriterSurName</td>
+        </tr>
+
+    }
+
+</table>

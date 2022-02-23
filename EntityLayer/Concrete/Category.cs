@@ -1,0 +1,22 @@
+﻿using CoreLayer.EntityLayer;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace EntityLayer.Concrete
+{
+    public class Category : IEntity
+    {
+        [Key]
+        public int Id { get; set; }
+        public int CategoryTypeId { get; set; }
+        public string CategoryName { get; set; }
+        public string? CategoryDescription { get; set; }
+        public DateTime CreateDate { get; set; }
+        public bool CategoryStatus { get; set; }
+
+    }
+}
