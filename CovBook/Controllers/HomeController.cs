@@ -24,7 +24,19 @@ namespace CovBook.Controllers
         public IActionResult Index()
         {
             var values = bm.GetBookDetails();
-            return View(values);
+            if(values.Success==false)
+            {
+                 
+                return RedirectToAction("Maintenance");
+            }
+            ViewBag.v1 = values.Message;
+            return View(values.Data);
+        }
+       
+        public IActionResult Maintenance()
+        {
+            ViewBag.v1 = bm.GetBookDetails().Message;
+            return View();
         }
 
         public IActionResult Privacy()

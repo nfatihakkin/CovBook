@@ -1,4 +1,5 @@
-﻿using EntityLayer.Concrete;
+﻿using CoreLayer.Utilities.Results.Abstract;
+using EntityLayer.Concrete;
 using EntityLayer.DTOs;
 using System;
 using System.Collections.Generic;
@@ -10,6 +11,6 @@ namespace BusinessLayer.Abstract
 {
     public interface IBookService:IGenericService<Book>
     {
-        List<BookDetailDto> GetBookDetails();
+        IDataResult<List<BookDetailDto>> GetBookDetails();
     }
 }

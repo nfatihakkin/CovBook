@@ -1,5 +1,8 @@
 ﻿using BusinessLayer.Abstract;
+using BusinessLayer.Constants;
 using CoreLayer.Utilities.Results;
+using CoreLayer.Utilities.Results.Abstract;
+using CoreLayer.Utilities.Results.Concrete;
 using DataAccessLayer.Abstract;
 using EntityLayer.Concrete;
 using EntityLayer.DTOs;
@@ -20,37 +23,42 @@ namespace BusinessLayer.Concrete
             _bookDal = bookDal;
         }
 
-        public List<BookDetailDto> GetBookDetails()
+        public IDataResult<List<BookDetailDto>> GetBookDetails()
         {
-            return _bookDal.GetBookDetails();
+            if (DateTime.Now.Hour == 22)
+            {
+                return new ErrorDataResult<List<BookDetailDto>>( Messages.Maintenance);
+            }
+            return new SuccessDataResult<List<BookDetailDto>>(_bookDal.GetBookDetails(),Messages.BookDetails);
         }
 
-        public Book GetById(int id)
+        public IDataResult<Book> GetById(int id)
         {
-            return _bookDal.GetOne(x => x.Id == id);
+            return new SuccessDataResult<Book>(_bookDal.GetOne(x => x.Id == id),Messages.GetBook);
         }
 
         public IResult TAdd(Book t)
         {
             _bookDal.Insert(t);
-            return new Result(true,"Kitap Eklendi !");
+            return new Result(true,Messages.BookAdded);
         }
 
         public IResult TDelete(Book t)
         {
             _bookDal.Delete(t);
-            return new Result(true, "Kitap Silindi !");
+            return new Result(true, Messages.BookDeleted);
         }
 
-        public List<Book> TGetList()
+        public IDataResult<List<Book>> TGetList()
         {
-            return _bookDal.GetAll();
+
+            return new SuccessDataResult<List<Book>>(_bookDal.GetAll(),Messages.BooksListed);
         }
 
         public IResult TUpdate(Book t)
         {
             _bookDal.Update(t);
-            return new Result(true, "Kitap Güncellendi !");
+            return new Result(true, Messages.BookUpdated);
         }
     }
 }

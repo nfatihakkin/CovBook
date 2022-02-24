@@ -1,4 +1,5 @@
 ﻿using CoreLayer.Utilities.Results;
+using CoreLayer.Utilities.Results.Abstract;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,8 +14,8 @@ namespace BusinessLayer.Abstract
         IResult TDelete(T t);
         IResult TUpdate(T t);
 
-        List<T> TGetList();
-        T GetById(int id);
+        IDataResult<List<T>> TGetList();
+        IDataResult<T> GetById(int id);
 
 
 
