@@ -32,8 +32,8 @@ namespace CovBookAPI
         {
 
             services.AddControllers();
-            services.AddSingleton<IBookService, BookManager>();
-            services.AddSingleton<IBookDal,EfBookDal>();
+            //services.AddSingleton<IBookService, BookManager>();
+            //services.AddSingleton<IBookDal,EfBookDal>();
 
 
             services.AddSwaggerGen(c =>

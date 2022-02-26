@@ -1,11 +1,14 @@
 ﻿using BusinessLayer.Abstract;
 using BusinessLayer.Constants;
+using BusinessLayer.ValidationRules.FluentValidation;
+using CoreLayer.CrossCuttingConcerns.Validation;
 using CoreLayer.Utilities.Results;
 using CoreLayer.Utilities.Results.Abstract;
 using CoreLayer.Utilities.Results.Concrete;
 using DataAccessLayer.Abstract;
 using EntityLayer.Concrete;
 using EntityLayer.DTOs;
+using FluentValidation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -39,6 +42,8 @@ namespace BusinessLayer.Concrete
 
         public IResult TAdd(Book t)
         {
+            ValidationTool.Validate(new BookValidator(), t);
+
             _bookDal.Insert(t);
             return new Result(true,Messages.BookAdded);
         }
