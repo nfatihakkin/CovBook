@@ -1,6 +1,7 @@
 ﻿using BusinessLayer.Abstract;
 using BusinessLayer.Constants;
 using BusinessLayer.ValidationRules.FluentValidation;
+using CoreLayer.Aspects.Autofac.Validation;
 using CoreLayer.CrossCuttingConcerns.Validation;
 using CoreLayer.Utilities.Results;
 using CoreLayer.Utilities.Results.Abstract;
@@ -39,11 +40,9 @@ namespace BusinessLayer.Concrete
         {
             return new SuccessDataResult<Book>(_bookDal.GetOne(x => x.Id == id),Messages.GetBook);
         }
-
+        [ValidationAspect(typeof(BookValidator))]
         public IResult TAdd(Book t)
         {
-            ValidationTool.Validate(new BookValidator(), t);
-
             _bookDal.Insert(t);
             return new Result(true,Messages.BookAdded);
         }
