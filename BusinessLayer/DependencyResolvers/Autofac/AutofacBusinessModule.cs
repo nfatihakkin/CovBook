@@ -4,7 +4,9 @@ using BusinessLayer.Abstract;
 using BusinessLayer.Concrete;
 using Castle.DynamicProxy;
 using CoreLayer.Utilities.Interceptors;
+using CoreLayer.Utilities.Security.JWT;
 using DataAccessLayer.Abstract;
+using DataAccessLayer.Concrete.EntityFramework;
 using DataAccessLayer.EntityFramework;
 using System;
 using System.Collections.Generic;
@@ -20,6 +22,14 @@ namespace BusinessLayer.DependencyResolvers.Autofac
         {
             builder.RegisterType<BookManager>().As<IBookService>().SingleInstance();
             builder.RegisterType<EfBookDal>().As<IBookDal>().SingleInstance();
+            builder.RegisterType<WriterManager>().As<IWriterService>().SingleInstance();
+            builder.RegisterType<EfWriterDal>().As<IWriterDal>().SingleInstance();
+
+            builder.RegisterType<UserManager>().As<IUserService>();
+            builder.RegisterType<EfUserDal>().As<IUserDal>();
+
+            builder.RegisterType<AuthManager>().As<IAuthService>();
+            builder.RegisterType<JwtHelper>().As<ITokenHelper>();
 
 
             var assembly = System.Reflection.Assembly.GetExecutingAssembly();

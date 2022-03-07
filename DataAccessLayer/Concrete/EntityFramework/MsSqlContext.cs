@@ -1,4 +1,5 @@
-﻿using EntityLayer.Concrete;
+﻿using CoreLayer.EntityLayer.Concrete;
+using EntityLayer.Concrete;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -21,6 +22,9 @@ namespace DataAccessLayer
         public DbSet<Publisher> Publishers { get; set; }
         public DbSet<CategoryType> CategoryTypes { get; set; }
         public DbSet<Writer> Writers { get; set; }
+        public DbSet<User> Users { get; set; }
+        public DbSet<UserOperationClaim> UserOperationClaims { get; set; }
+        public DbSet<OperationClaim> OperationClaims { get; set; }
 
     }
 }

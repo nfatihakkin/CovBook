@@ -19,7 +19,7 @@ namespace CovBook.Controllers
         {
             _logger = logger;
         }
-        BookManager bm = new BookManager(new EfBookDal());
+        BookManager bm = new BookManager(new EfBookDal(),new WriterManager(new EfWriterDal()));
 
         public IActionResult Index()
         {

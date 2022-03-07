@@ -14,7 +14,7 @@ namespace BusinessLayer.ValidationRules.FluentValidation
         {
             RuleFor(p => p.BookName).NotEmpty();
             RuleFor(p => p.BookPrice).GreaterThan(20).When(p => p.WriterId == 1);
-            RuleFor(p => p.BookName).Must(StartWithS).WithMessage("S harfi ile başlamalı !!!");
+           // RuleFor(p => p.BookName).Must(StartWithS).WithMessage("S harfi ile başlamalı !!!");
         }
 
         private bool StartWithS(string arg)
