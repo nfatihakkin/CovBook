@@ -1,5 +1,8 @@
 using BusinessLayer.Abstract;
 using BusinessLayer.Concrete;
+using CoreLayer.DependencyResolvers;
+using CoreLayer.Extensions;
+using CoreLayer.Utilities.IoC;
 using CoreLayer.Utilities.Security.Encryption;
 using CoreLayer.Utilities.Security.JWT;
 using DataAccessLayer.Abstract;
@@ -61,6 +64,10 @@ namespace CovBookAPI
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "CovBookAPI", Version = "v1" });
+            });
+
+            services.AddDependencyResolvers(new ICoreModule[] { 
+            new CoreModule()
             });
         }
 
