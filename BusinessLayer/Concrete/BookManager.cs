@@ -2,6 +2,8 @@
 using BusinessLayer.BusinessAspects.Autofac;
 using BusinessLayer.Constants;
 using BusinessLayer.ValidationRules.FluentValidation;
+using CoreLayer.Aspects.Autofac.Caching;
+using CoreLayer.Aspects.Autofac.Transaction;
 using CoreLayer.Aspects.Autofac.Validation;
 using CoreLayer.CrossCuttingConcerns.Validation;
 using CoreLayer.Utilities.Business;
@@ -30,7 +32,7 @@ namespace BusinessLayer.Concrete
             _bookDal = bookDal;
             _writerService = writerService;
         }
-
+        [CacheAspect]
         public IDataResult<List<BookDetailDto>> GetBookDetails()
         {
             if (DateTime.Now.Hour == 22)
@@ -39,13 +41,17 @@ namespace BusinessLayer.Concrete
             }
             return new SuccessDataResult<List<BookDetailDto>>(_bookDal.GetBookDetails(), Messages.BookDetails);
         }
-
+        [CacheAspect]
         public IDataResult<Book> GetById(int id)
         {
             return new SuccessDataResult<Book>(_bookDal.GetOne(x => x.Id == id), Messages.GetBook);
         }
+
+
         [SecuredOperation("book.add,admin")]
         [ValidationAspect(typeof(BookValidator))]
+        [CacheRemoveAspect("IBookService.Get")]
+
         public IResult TAdd(Book t)
         {
             var result = BusinessRules.Run(
@@ -66,19 +72,36 @@ namespace BusinessLayer.Concrete
             _bookDal.Delete(t);
             return new Result(true, Messages.BookDeleted);
         }
-
+        [CacheAspect]
         public IDataResult<List<Book>> TGetList()
         {
 
             return new SuccessDataResult<List<Book>>(_bookDal.GetAll(), Messages.BooksListed);
         }
-
+        [CacheRemoveAspect("IBookService.Get")]
         public IResult TUpdate(Book t)
         {
             _bookDal.Update(t);
             return new Result(true, Messages.BookUpdated);
         }
 
+
+        [TransactionScopeAspect]
+        public IResult TransactionTest(Book t)
+        {
+
+
+            //Transaction test
+
+
+            return new Result(true, Messages.BookUpdated);
+        }
+
+
+
+
+
+        // private business methods
         private IResult CheckIfWriterBookCountCorrect(int writerID)
         {
             var result = _bookDal.GetAll(x => x.WriterId == writerID).Count;
