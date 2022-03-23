@@ -24,6 +24,8 @@ namespace BusinessLayer.DependencyResolvers.Autofac
             builder.RegisterType<EfBookDal>().As<IBookDal>().SingleInstance();
             builder.RegisterType<WriterManager>().As<IWriterService>().SingleInstance();
             builder.RegisterType<EfWriterDal>().As<IWriterDal>().SingleInstance();
+            builder.RegisterType<CategoryManager>().As<ICategoryService>().SingleInstance();
+            builder.RegisterType<EfCategoryDal>().As<ICategoryDal>().SingleInstance();
 
             builder.RegisterType<UserManager>().As<IUserService>();
             builder.RegisterType<EfUserDal>().As<IUserDal>();

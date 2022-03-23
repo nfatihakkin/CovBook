@@ -39,6 +39,7 @@ namespace CovBookAPI
         {
 
             services.AddControllers();
+            services.AddCors();
             //services.AddSingleton<IBookService, BookManager>();
             //services.AddSingleton<IBookDal,EfBookDal>();
 
@@ -80,7 +81,7 @@ namespace CovBookAPI
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "CovBookAPI v1"));
             }
-
+            app.UseCors(builder => builder.WithOrigins("http://localhost:4200").AllowAnyHeader());
             app.UseHttpsRedirection();
 
             app.UseRouting();

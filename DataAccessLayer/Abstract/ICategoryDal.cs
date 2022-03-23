@@ -1,5 +1,6 @@
 ﻿using CoreLayer.DataAccessLayer;
 using EntityLayer.Concrete;
+using EntityLayer.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,5 +11,6 @@ namespace DataAccessLayer.Abstract
 {
     public interface ICategoryDal : IEntityRepository<Category>
     {
+        List<CategoryDetailDto> GetCategoryDetails();
     }
 }

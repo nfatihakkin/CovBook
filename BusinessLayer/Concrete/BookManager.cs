@@ -35,7 +35,7 @@ namespace BusinessLayer.Concrete
         [CacheAspect]
         public IDataResult<List<BookDetailDto>> GetBookDetails()
         {
-            if (DateTime.Now.Hour == 22)
+            if (DateTime.Now.Hour == 06)
             {
                 return new ErrorDataResult<List<BookDetailDto>>(Messages.Maintenance);
             }

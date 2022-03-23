@@ -1,4 +1,6 @@
-﻿using EntityLayer.Concrete;
+﻿using CoreLayer.Utilities.Results.Abstract;
+using EntityLayer.Concrete;
+using EntityLayer.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,5 +11,6 @@ namespace BusinessLayer.Abstract
 {
     public interface ICategoryService : IGenericService<Category>
     {
+        IDataResult<List<CategoryDetailDto>> GetCategoryDetails();
     }
 }
