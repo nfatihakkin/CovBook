@@ -125,7 +125,7 @@ namespace BusinessLayer.Concrete
         private IResult CheckIfWriterLimitExceded()
         {
             var result = _writerService.TGetList();
-            if (result.Data.Count >=4)
+            if (result.Data.Count >=10)
             {
                 return new ErrorResult(Messages.WriterLimitExceded);
             }
@@ -133,5 +133,9 @@ namespace BusinessLayer.Concrete
             return new SuccessResult();
         }
 
+        public IDataResult<List<BookDetailDto>> GetByCategory(int categoryId)
+        {
+            return new SuccessDataResult<List<BookDetailDto>>(_bookDal.GetByCategory(categoryId),"Kategoriye göre Listelendi !");
+        }
     }
 }

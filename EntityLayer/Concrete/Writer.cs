@@ -17,5 +17,6 @@ namespace EntityLayer.Concrete
         public DateTime BirthDate { get; set; }
         public string WriterImage { get; set; }
         public bool WriterStatus { get; set; }
+        public List<Book> Books { get; set; }
     }
 }

@@ -14,6 +14,7 @@ namespace EntityLayer.Concrete
         public int Id { get; set; }
         public int PublisherId { get; set; }
         public int WriterId { get; set; }
+        public int CategoryId { get; set; }
         public string BookName { get; set; }
         public string BookDescription { get; set; }
         public int NumOfPages { get; set; }
@@ -25,5 +26,9 @@ namespace EntityLayer.Concrete
         public string? BookImage2 { get; set; }
         public int Quantity { get; set; }
         public bool Status { get; set; }
+
+        public Publisher publisher { get; set; }
+        public Category category { get; set; }
+        public Writer writer { get; set; }
     }
 }

@@ -17,6 +17,7 @@ namespace EntityLayer.Concrete
         public string? CategoryDescription { get; set; }
         public DateTime CreateDate { get; set; }
         public bool CategoryStatus { get; set; }
+        public List<Book> Books { get; set; }
 
     }
 }

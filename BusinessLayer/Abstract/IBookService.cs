@@ -12,5 +12,6 @@ namespace BusinessLayer.Abstract
     public interface IBookService:IGenericService<Book>
     {
         IDataResult<List<BookDetailDto>> GetBookDetails();
+        IDataResult<List<BookDetailDto>> GetByCategory(int categoryId);
     }
 }

@@ -58,5 +58,16 @@ namespace CovBookAPI.Controllers
             return BadRequest(result);
 
         }
+
+        [HttpGet("getbycategory")]
+        public IActionResult GetByCategory(int categoryId)
+        {
+            var result = _bookService.GetByCategory(categoryId);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
     }
 }

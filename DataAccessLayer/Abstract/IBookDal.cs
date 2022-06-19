@@ -12,5 +12,6 @@ namespace DataAccessLayer.Abstract
     public interface IBookDal: IEntityRepository<Book>
     {
         List<BookDetailDto> GetBookDetails();
+        List<BookDetailDto> GetByCategory(int categoryId);
     }
 }
